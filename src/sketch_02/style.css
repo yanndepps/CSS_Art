@@ -24,8 +24,8 @@ body {
 	box-sizing: content-box;
 	border-radius: 50%;
 	border: 15px solid #242931;
-	box-shadow: 15px 15px 35px rgba(0, 0, 0, 0.2);
-	inset: 0 0 30px rgba(0, 0, 0, 0.4);
+	box-shadow: 15px 15px 35px rgba(0, 0, 0, 0.2),
+	inset 0 0 30px rgba(0, 0, 0, 0.4);
 }
 
 img {
