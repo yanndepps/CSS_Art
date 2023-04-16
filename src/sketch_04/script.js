@@ -50,4 +50,12 @@ const displayTasks = () => {
 		taskInnerDiv.innerHTML += `<button class="delete"><i class="fa-solid fa-trash"></button>`;
 		tasksDiv.appendChild(taskInnerDiv);
 	}
+};
+
+// disable edit button
+const disableBtns = (bool) => {
+	let editBtns = document.getElementsByClassName("edit");
+	Array.from(editBtns).forEach(el => {
+		el.disabled = bool;
+	});
 }
