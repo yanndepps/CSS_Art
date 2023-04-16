@@ -58,4 +58,10 @@ const disableBtns = (bool) => {
 	Array.from(editBtns).forEach(el => {
 		el.disabled = bool;
 	});
+};
+
+// rm task from local storage
+const rmTask = (taskValue) => {
+	localStorage.removeItem(taskValue);
+	displayTasks();
 }
