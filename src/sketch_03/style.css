@@ -15,7 +15,7 @@ body {
 		);
 }
 
-form {
+#main-form {
 	background-color: #202020;
 	height: 450px;
 	width: 400px;
