@@ -64,4 +64,10 @@ const disableBtns = (bool) => {
 const rmTask = (taskValue) => {
 	localStorage.removeItem(taskValue);
 	displayTasks();
-}
+};
+
+// add tasks to LS
+const updateStorage = (index, taskValue, completed) => {
+	localStorage.setItem(`${index}_${taskValue}`, completed);
+	displayTasks();
+};
