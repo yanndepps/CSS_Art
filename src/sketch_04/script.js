@@ -34,7 +34,7 @@ const displayTasks = () => {
 		let taskInnerDiv = document.createElement("div");
 		taskInnerDiv.classList.add("task");
 		taskInnerDiv.setAttribute("id", key);
-		taskInnerDiv.innerHTML = `<span id="taskname">${key.split(_)[1]}</span>`;
+		taskInnerDiv.innerHTML = `<span id="taskname">${key.split("_")[1]}</span>`;
 
 		// parse boolean back to boolean
 		let editButton = document.createElement("button");
@@ -71,3 +71,26 @@ const updateStorage = (index, taskValue, completed) => {
 	localStorage.setItem(`${index}_${taskValue}`, completed);
 	displayTasks();
 };
+
+// add new task to LS
+document.querySelector("#push").addEventListener("click", () => {
+	// enable edit btn
+	disableBtns(false);
+	if (newTaskInput.value.length == 0) {
+		alert("Please enter a task!");
+	} else {
+		// store and display from LS
+		if (updateNote == "") {
+			// new task
+			updateStorage(count, newTaskInput.value, false);
+		} else {
+			// update task
+			let existingCount = updateNote.split("_")[0];
+			rmTask(updateNote);
+			updateStorage(existingCount, newTaskInput.value, false);
+			updateNote = "";
+		}
+		count += 1;
+		newTaskInput.value = "";
+	}
+});
