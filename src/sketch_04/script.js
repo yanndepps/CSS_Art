@@ -11,3 +11,43 @@ window.onload = () => {
 	count = Object.keys(localStorage).length;
 	displayTasks();
 }
+
+// display tasks
+const displayTasks = () => {
+	if (Object.keys(localStorage).length > 0) {
+		tasksDiv.style.display = "inline-block";
+	} else {
+		tasksDiv.style.display = "none";
+	}
+
+	// clear task
+	tasksDiv.innerHTML = "";
+
+	// fetch all keys in LS
+	let tasks = Object.keys(localStorage);
+	tasks = tasks.sort();
+
+	for (let key of tasks) {
+		let classValue = "";
+		// get all values
+		let value = localStorage.getItem(key);
+		let taskInnerDiv = document.createElement("div");
+		taskInnerDiv.classList.add("task");
+		taskInnerDiv.setAttribute("id", key);
+		taskInnerDiv.innerHTML = `<span id="taskname">${key.split(_)[1]}</span>`;
+
+		// parse boolean back to boolean
+		let editButton = document.createElement("button");
+		editButton.classList.add("edit");
+		editButton.innerHTML = `<i class="fa-solid fa-pen-to-square"></i>`;
+		if (!JSON.parse(value)) {
+			editButton.style.visibility = "visible";
+		} else {
+			editButton.style.visibility = "hidden";
+			taskInnerDiv.classList.add("completed");
+		}
+		taskInnerDiv.appendChild(editButton);
+		taskInnerDiv.innerHTML += `<button class="delete"><i class="fa-solid fa-trash"></button>`;
+		tasksDiv.appendChild(taskInnerDiv);
+	}
+}
