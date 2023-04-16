@@ -50,6 +50,21 @@ const displayTasks = () => {
 		taskInnerDiv.innerHTML += `<button class="delete"><i class="fa-solid fa-trash"></button>`;
 		tasksDiv.appendChild(taskInnerDiv);
 	}
+
+	// task completed
+	tasks = document.querySelectorAll(".task");
+	tasks.forEach((element, index) => {
+		element.onclick = () => {
+			// LS update
+			if (element.classList.contains("completed")) {
+				updateStorage(element.id.split("_")[0], element.innerText, false);
+			} else {
+				updateStorage(element.id.split("_")[0], element.innerText, true);
+			}
+		};
+	});
+
+	// TODO: edit tasks
 };
 
 // disable edit button
