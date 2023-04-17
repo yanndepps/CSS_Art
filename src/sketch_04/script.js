@@ -53,7 +53,7 @@ const displayTasks = () => {
 
 	// task completed
 	tasks = document.querySelectorAll(".task");
-	tasks.forEach((element, index) => {
+	tasks.forEach((element) => {
 		element.onclick = () => {
 			// LS update
 			if (element.classList.contains("completed")) {
@@ -64,14 +64,43 @@ const displayTasks = () => {
 		};
 	});
 
-	// TODO: edit tasks
+	// edit tasks
+	editTasks = document.getElementsByClassName("edit");
+	Array.from(editTasks).forEach((element) => {
+		element.addEventListener("click", (e) => {
+			// stop propagation to outer elements when removed
+			e.stopPropagation();
+			// diable other btns when one task id edited
+			disableBtns(true);
+			// upd input value & rm div
+			let parent = element.parentElement;
+			newTaskInput.value = parent.querySelector("#taskname").innerText;
+			// set updateNote to the task that is being edited
+			updateNote = parent.id;
+			// rm task
+			parent.remove();
+		});
+	});
+
+	// delete tasks
+	deleteTasks = document.getElementsByClassName("delete");
+	Array.from(deleteTasks).forEach((element) => {
+		element.addEventListener("click", (e) => {
+			e.stopPropagation();
+			// delete from LS & rm div
+			let parent = element.parentElement;
+			rmTask(parent.id);
+			parent.remove();
+			count -= 1;
+		});
+	});
 };
 
 // disable edit button
 const disableBtns = (bool) => {
 	let editBtns = document.getElementsByClassName("edit");
-	Array.from(editBtns).forEach(el => {
-		el.disabled = bool;
+	Array.from(editBtns).forEach((element) => {
+		element.disabled = bool;
 	});
 };
 
